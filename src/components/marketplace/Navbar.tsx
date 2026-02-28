@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
@@ -10,10 +10,8 @@ import {
   Package, Heart
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { createClient } from "@/lib/supabase/client";
-import { cn, initials, getAvatarFallback } from "@/lib/utils";
+import { cn, initials } from "@/lib/utils";
 import type { Profile } from "@/types";
 
 interface NavbarProps {
@@ -26,32 +24,6 @@ export function Navbar({ user }: NavbarProps) {
   const [query, setQuery] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
-  const [unreadCount, setUnreadCount] = useState(0);
-  const supabase = createClient();
-
-  useEffect(() => {
-    if (!user) return;
-
-    // Fetch unread notification count
-    supabase
-      .from("notifications")
-      .select("id", { count: "exact", head: true })
-      .eq("user_id", user.id)
-      .eq("is_read", false)
-      .then(({ count }) => setUnreadCount(count ?? 0));
-
-    // Subscribe to realtime notifications
-    const channel = supabase
-      .channel("notifications")
-      .on(
-        "postgres_changes",
-        { event: "INSERT", schema: "public", table: "notifications", filter: `user_id=eq.${user.id}` },
-        () => setUnreadCount((c) => c + 1)
-      )
-      .subscribe();
-
-    return () => { supabase.removeChannel(channel); };
-  }, [user, supabase]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -60,8 +32,7 @@ export function Navbar({ user }: NavbarProps) {
     }
   };
 
-  const handleSignOut = async () => {
-    await supabase.auth.signOut();
+  const handleSignOut = () => {
     router.push("/");
     router.refresh();
   };
@@ -134,19 +105,9 @@ export function Navbar({ user }: NavbarProps) {
                 </Button>
 
                 {/* Notifications */}
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  asChild
-                  className="relative"
-                >
+                <Button variant="ghost" size="icon" asChild>
                   <Link href="/dashboard/notifications">
                     <Bell className="h-5 w-5" />
-                    {unreadCount > 0 && (
-                      <span className="absolute -top-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-white">
-                        {unreadCount > 9 ? "9+" : unreadCount}
-                      </span>
-                    )}
                   </Link>
                 </Button>
 
