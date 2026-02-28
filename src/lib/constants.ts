@@ -1,5 +1,5 @@
 // =============================================================
-// One Piece TCG PH — App Constants
+// The Grandline Marketplace — App Constants
 // =============================================================
 
 import type {
@@ -7,7 +7,7 @@ import type {
   ShippingMethod, PaymentMethod, ReportReason
 } from "@/types";
 
-export const APP_NAME = "OP TCG PH";
+export const APP_NAME = "The Grandline Marketplace";
 export const APP_DESCRIPTION = "The trusted marketplace for One Piece TCG in the Philippines";
 export const PLATFORM_FEE_PERCENT = 0.03; // 3%
 export const MIN_LISTING_IMAGES = 2;

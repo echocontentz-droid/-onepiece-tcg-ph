@@ -31,10 +31,10 @@ export function Footer() {
           <div>
             <Link href="/" className="flex items-center gap-2 mb-4">
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-                <span className="text-sm font-bold text-white">OP</span>
+                <span className="text-sm font-bold text-white">GL</span>
               </div>
               <span className="font-bold text-foreground">
-                TCG <span className="text-primary">PH</span>
+                Grandline <span className="text-primary">Market</span>
               </span>
             </Link>
             <p className="text-sm text-muted-foreground mb-4">
@@ -69,7 +69,7 @@ export function Footer() {
 
         <div className="mt-10 border-t border-border pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} OP TCG PH. All rights reserved.
+            © {new Date().getFullYear()} The Grandline Marketplace. All rights reserved.
           </p>
           <p className="text-xs text-muted-foreground flex items-center gap-1">
             Made with <Heart className="h-3 w-3 text-primary fill-primary" /> by Filipino players, for Filipino players.

@@ -18,10 +18,10 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         <div className="relative flex flex-col h-full p-12">
           <Link href="/" className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary">
-              <span className="font-bold text-white">OP</span>
+              <span className="font-bold text-white">GL</span>
             </div>
             <span className="text-xl font-bold text-white">
-              TCG <span className="text-op-gold">PH</span>
+              Grandline <span className="text-op-gold">Market</span>
             </span>
           </Link>
 
@@ -53,7 +53,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           </div>
 
           <p className="text-white/40 text-xs">
-            © {new Date().getFullYear()} OP TCG PH. Philippines.
+            © {new Date().getFullYear()} The Grandline Marketplace. Philippines.
           </p>
         </div>
       </div>
@@ -64,10 +64,10 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           {/* Mobile logo */}
           <Link href="/" className="flex items-center gap-2 mb-8 lg:hidden">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-              <span className="text-sm font-bold text-white">OP</span>
+              <span className="text-sm font-bold text-white">GL</span>
             </div>
             <span className="font-bold text-foreground">
-              TCG <span className="text-primary">PH</span>
+              Grandline <span className="text-primary">Market</span>
             </span>
           </Link>
 

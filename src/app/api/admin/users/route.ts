@@ -87,7 +87,7 @@ export async function POST(request: NextRequest) {
         user_id: data.user_id,
         type: "system_message",
         title: "Account Reinstated",
-        message: "Your account has been reinstated. You may resume using OP TCG PH.",
+        message: "Your account has been reinstated. You may resume using The Grandline Marketplace.",
         link: null,
       });
 
@@ -108,7 +108,7 @@ export async function POST(request: NextRequest) {
         user_id: data.user_id,
         type: "account_verified",
         title: "You're Verified! ✅",
-        message: "Congratulations! You are now a Verified Seller on OP TCG PH. Your listings will show the blue shield badge.",
+        message: "Congratulations! You are now a Verified Seller on The Grandline Marketplace. Your listings will show the blue shield badge.",
         link: "/dashboard",
       });
 

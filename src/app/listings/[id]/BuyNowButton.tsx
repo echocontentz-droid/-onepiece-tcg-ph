@@ -196,7 +196,7 @@ export function BuyNowButton({ listing, userId }: BuyNowButtonProps) {
               </div>
 
               <p className="text-xs text-muted-foreground text-center">
-                Payment goes to OP TCG PH escrow — released to seller only after you confirm receipt.
+                Payment goes to The Grandline Marketplace escrow — released to seller only after you confirm receipt.
               </p>
             </div>
 

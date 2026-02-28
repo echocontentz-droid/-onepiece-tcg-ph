@@ -51,10 +51,10 @@ export function Navbar({ user }: NavbarProps) {
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 shrink-0">
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
-              <span className="text-sm font-bold text-white">OP</span>
+              <span className="text-sm font-bold text-white">GL</span>
             </div>
             <span className="hidden font-bold text-foreground sm:block">
-              TCG <span className="text-primary">PH</span>
+              Grandline <span className="text-primary">Market</span>
             </span>
           </Link>
 

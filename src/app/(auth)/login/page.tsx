@@ -57,7 +57,7 @@ export default function LoginPage() {
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-foreground">Welcome back</h1>
         <p className="text-muted-foreground mt-1">
-          Sign in to your OP TCG PH account
+          Sign in to your The Grandline Marketplace account
         </p>
       </div>
 

@@ -13,7 +13,7 @@ import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import Image from "next/image";
 
-export const metadata = { title: "Dashboard | OP TCG PH" };
+export const metadata = { title: "Dashboard | The Grandline Marketplace" };
 
 export default async function DashboardPage() {
   const supabase = await createClient();

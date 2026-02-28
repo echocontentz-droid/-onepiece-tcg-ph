@@ -4,19 +4,19 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
-    default: "OP TCG PH — One Piece TCG Marketplace Philippines",
-    template: "%s | OP TCG PH",
+    default: "The Grandline Marketplace — One Piece TCG Philippines",
+    template: "%s | The Grandline Marketplace",
   },
   description:
     "The trusted marketplace for One Piece Trading Card Game players in the Philippines. Buy and sell OP cards safely with escrow protection.",
-  keywords: ["One Piece TCG", "trading card game", "Philippines", "buy sell cards", "OP cards", "marketplace"],
-  authors: [{ name: "OP TCG PH" }],
+  keywords: ["One Piece TCG", "trading card game", "Philippines", "buy sell cards", "OP cards", "marketplace", "Grandline"],
+  authors: [{ name: "The Grandline Marketplace" }],
   openGraph: {
     type: "website",
     locale: "en_PH",
-    title: "OP TCG PH — One Piece TCG Marketplace Philippines",
+    title: "The Grandline Marketplace — One Piece TCG Philippines",
     description: "Buy and sell One Piece TCG cards safely with escrow protection.",
-    siteName: "OP TCG PH",
+    siteName: "The Grandline Marketplace",
   },
   robots: { index: true, follow: true },
 };

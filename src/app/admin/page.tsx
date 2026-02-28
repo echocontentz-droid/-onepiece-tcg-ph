@@ -15,7 +15,7 @@ import { AdminReportsTable } from "./AdminReportsTable";
 import { AdminVerificationsTable } from "./AdminVerificationsTable";
 import { AdminStatsChart } from "./AdminStatsChart";
 
-export const metadata = { title: "Admin Dashboard | OP TCG PH" };
+export const metadata = { title: "Admin Dashboard | The Grandline Marketplace" };
 
 export default async function AdminDashboard() {
   const supabase = await createClient();
@@ -95,7 +95,7 @@ export default async function AdminDashboard() {
               Admin Dashboard
             </h1>
             <p className="text-muted-foreground text-sm mt-0.5">
-              OP TCG PH Control Panel
+              The Grandline Marketplace Control Panel
             </p>
           </div>
           <div className="flex items-center gap-2">

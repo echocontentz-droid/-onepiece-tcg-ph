@@ -16,7 +16,7 @@ import type { Listing } from "@/types";
 
 export async function generateMetadata({ params }: { params: Promise<{ username: string }> }) {
   const { username } = await params;
-  return { title: `@${username} | OP TCG PH` };
+  return { title: `@${username} | The Grandline Marketplace` };
 }
 
 export default async function ProfilePage({

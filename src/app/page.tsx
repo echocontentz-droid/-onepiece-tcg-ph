@@ -185,7 +185,7 @@ export default function HomePage() {
         {/* Why us */}
         <section className="py-16 bg-background">
           <div className="mx-auto max-w-5xl px-4 sm:px-6 text-center">
-            <h2 className="text-3xl font-bold mb-3">Why use OP TCG PH?</h2>
+            <h2 className="text-3xl font-bold mb-3">Why use The Grandline Marketplace?</h2>
             <p className="text-muted-foreground mb-12 max-w-xl mx-auto">
               Stop risking your money in unprotected Facebook deals.
             </p>

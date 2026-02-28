@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   if (!listing) return { title: "Listing Not Found" };
 
   return {
-    title: `${listing.card_name} — ${formatPHP(listing.price)} | OP TCG PH`,
+    title: `${listing.card_name} — ${formatPHP(listing.price)} | The Grandline Marketplace`,
     description: listing.title,
   };
 }

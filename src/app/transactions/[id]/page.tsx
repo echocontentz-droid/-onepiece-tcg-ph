@@ -11,7 +11,7 @@ import { EscrowActionPanel } from "./EscrowActionPanel";
 import Image from "next/image";
 import Link from "next/link";
 
-export const metadata = { title: "Transaction Details | OP TCG PH" };
+export const metadata = { title: "Transaction Details | The Grandline Marketplace" };
 
 export default async function TransactionDetailPage({
   params,

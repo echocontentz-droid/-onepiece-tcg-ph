@@ -5,7 +5,7 @@ import { Footer } from "@/components/marketplace/Footer";
 import { ListingForm } from "./ListingForm";
 
 export const metadata = {
-  title: "List a Card for Sale | OP TCG PH",
+  title: "List a Card for Sale | The Grandline Marketplace",
 };
 
 export default async function CreateListingPage() {
