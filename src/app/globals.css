@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 224 71.4% 4.1%;
+    --card: 0 0% 100%;
+    --card-foreground: 224 71.4% 4.1%;
+    --primary: 0 74% 58%;          /* OP Red */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 14.3% 95.9%;
+    --secondary-foreground: 220.9 39.3% 11%;
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
+    --accent: 39 100% 67%;         /* OP Gold */
+    --accent-foreground: 220.9 39.3% 11%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 0 74% 58%;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 220 27% 8%;       /* Deep navy */
+    --foreground: 210 20% 98%;
+    --card: 222 25% 12%;
+    --card-foreground: 210 20% 98%;
+    --primary: 0 74% 58%;           /* OP Red */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 222 25% 16%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 222 25% 16%;
+    --muted-foreground: 217 10% 64%;
+    --accent: 39 100% 67%;          /* OP Gold */
+    --accent-foreground: 220.9 39.3% 11%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 222 20% 20%;
+    --input: 222 20% 20%;
+    --ring: 0 74% 58%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-muted;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-border rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground/50;
+  }
+}
+
+@layer components {
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-op-red to-op-gold bg-clip-text text-transparent;
+  }
+
+  /* Card shimmer loading */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--muted)) 25%,
+      hsl(var(--border)) 50%,
+      hsl(var(--muted)) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite linear;
+  }
+
+  /* Listing card hover */
+  .listing-card {
+    @apply transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5;
+  }
+
+  /* Badge variants */
+  .badge-mint      { @apply bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-400; }
+  .badge-near_mint { @apply bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-400; }
+  .badge-lightly_played { @apply bg-yellow-100 text-yellow-800 dark:bg-yellow-900/40 dark:text-yellow-400; }
+  .badge-moderately_played { @apply bg-orange-100 text-orange-800 dark:bg-orange-900/40 dark:text-orange-400; }
+  .badge-heavily_played { @apply bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-400; }
+  .badge-damaged   { @apply bg-gray-100 text-gray-800 dark:bg-gray-800/60 dark:text-gray-400; }
+
+  /* Rarity badges */
+  .badge-secret_rare { @apply bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-400 font-semibold; }
+  .badge-super_rare  { @apply bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-400 font-semibold; }
+  .badge-rare        { @apply bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-400; }
+  .badge-leader      { @apply bg-sky-100 text-sky-700 dark:bg-sky-900/40 dark:text-sky-400; }
+  .badge-promo       { @apply bg-pink-100 text-pink-700 dark:bg-pink-900/40 dark:text-pink-400; }
+
+  /* Transaction status */
+  .status-pending_payment   { @apply bg-yellow-100 text-yellow-800 dark:bg-yellow-900/40 dark:text-yellow-400; }
+  .status-payment_submitted { @apply bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-400; }
+  .status-in_escrow         { @apply bg-purple-100 text-purple-800 dark:bg-purple-900/40 dark:text-purple-400; }
+  .status-shipped           { @apply bg-indigo-100 text-indigo-800 dark:bg-indigo-900/40 dark:text-indigo-400; }
+  .status-completed         { @apply bg-green-100 text-green-800 dark:bg-green-900/40 dark:text-green-400; }
+  .status-disputed          { @apply bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-400; }
+  .status-cancelled         { @apply bg-gray-100 text-gray-800 dark:bg-gray-800/60 dark:text-gray-400; }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
