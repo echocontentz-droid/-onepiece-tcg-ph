@@ -17,6 +17,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "placehold.co",
       },
+      {
+        protocol: "https",
+        hostname: "limitlesstcg.nyc3.cdn.digitaloceanspaces.com",
+      },
     ],
   },
   experimental: {

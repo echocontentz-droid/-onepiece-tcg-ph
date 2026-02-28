@@ -24,7 +24,7 @@ const MOCK_LISTINGS: Listing[] = [
     created_at: new Date(Date.now() - 2 * 3600000).toISOString(),
     updated_at: new Date().toISOString(),
     seller: { id: "s1", username: "luffyfan_ph", display_name: "Nico R.", email: "nico@example.com", phone: null, avatar_url: null, bio: null, role: "seller", province: "Metro Manila", city: "Makati", email_verified: true, phone_verified: true, is_verified_seller: true, is_banned: false, ban_reason: null, total_sales: 87, total_purchases: 12, rating_avg: 4.9, rating_count: 74, member_since: "2023-01-15T00:00:00Z", last_active_at: new Date().toISOString(), preferred_payment: ["gcash"], preferred_shipping: ["lbc"], allow_meetup: true, gcash_number: null, maya_number: null, created_at: "2023-01-15T00:00:00Z", updated_at: new Date().toISOString() },
-    images: [{ id: "i1", listing_id: "1", url: "https://placehold.co/300x420/1D3461/E63946?text=Luffy+SEC", storage_path: "", is_primary: true, display_order: 0, created_at: "" }],
+    images: [{ id: "i1", listing_id: "1", url: "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/one-piece/OP01/OP01-120_en.webp", storage_path: "", is_primary: true, display_order: 0, created_at: "" }],
   },
   {
     id: "2", seller_id: "s2", card_name: "Roronoa Zoro",
@@ -38,7 +38,7 @@ const MOCK_LISTINGS: Listing[] = [
     created_at: new Date(Date.now() - 5 * 3600000).toISOString(),
     updated_at: new Date().toISOString(),
     seller: { id: "s2", username: "zorogoat", display_name: "Marco D.", email: "marco@example.com", phone: null, avatar_url: null, bio: null, role: "seller", province: "Cebu", city: "Cebu City", email_verified: true, phone_verified: false, is_verified_seller: true, is_banned: false, ban_reason: null, total_sales: 34, total_purchases: 6, rating_avg: 4.7, rating_count: 29, member_since: "2023-06-20T00:00:00Z", last_active_at: new Date().toISOString(), preferred_payment: ["gcash", "maya"], preferred_shipping: ["jt_express"], allow_meetup: false, gcash_number: null, maya_number: null, created_at: "2023-06-20T00:00:00Z", updated_at: new Date().toISOString() },
-    images: [{ id: "i2", listing_id: "2", url: "https://placehold.co/300x420/1D3461/F4A261?text=Zoro+Foil", storage_path: "", is_primary: true, display_order: 0, created_at: "" }],
+    images: [{ id: "i2", listing_id: "2", url: "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/one-piece/OP01/OP01-001_en.webp", storage_path: "", is_primary: true, display_order: 0, created_at: "" }],
   },
   {
     id: "3", seller_id: "s3", card_name: "Trafalgar Law",
@@ -52,7 +52,7 @@ const MOCK_LISTINGS: Listing[] = [
     created_at: new Date(Date.now() - 24 * 3600000).toISOString(),
     updated_at: new Date().toISOString(),
     seller: { id: "s3", username: "lawkeeper_ph", display_name: "Ana S.", email: "ana@example.com", phone: null, avatar_url: null, bio: null, role: "user", province: "Metro Manila", city: "Quezon City", email_verified: true, phone_verified: false, is_verified_seller: false, is_banned: false, ban_reason: null, total_sales: 5, total_purchases: 22, rating_avg: 5.0, rating_count: 5, member_since: "2024-02-10T00:00:00Z", last_active_at: new Date().toISOString(), preferred_payment: null, preferred_shipping: null, allow_meetup: true, gcash_number: null, maya_number: null, created_at: "2024-02-10T00:00:00Z", updated_at: new Date().toISOString() },
-    images: [{ id: "i3", listing_id: "3", url: "https://placehold.co/300x420/1D3461/A78BFA?text=Law+SR", storage_path: "", is_primary: true, display_order: 0, created_at: "" }],
+    images: [{ id: "i3", listing_id: "3", url: "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/one-piece/OP05/OP05-093_en.webp", storage_path: "", is_primary: true, display_order: 0, created_at: "" }],
   },
   {
     id: "4", seller_id: "s4", card_name: "Portgas D. Ace",
@@ -66,7 +66,7 @@ const MOCK_LISTINGS: Listing[] = [
     created_at: new Date(Date.now() - 10 * 3600000).toISOString(),
     updated_at: new Date().toISOString(),
     seller: { id: "s4", username: "ace_davao", display_name: "Ben T.", email: "ben@example.com", phone: null, avatar_url: null, bio: null, role: "seller", province: "Davao del Sur", city: "Davao City", email_verified: true, phone_verified: true, is_verified_seller: true, is_banned: false, ban_reason: null, total_sales: 156, total_purchases: 31, rating_avg: 4.8, rating_count: 140, member_since: "2022-11-01T00:00:00Z", last_active_at: new Date().toISOString(), preferred_payment: ["gcash", "maya"], preferred_shipping: ["lbc", "jt_express"], allow_meetup: true, gcash_number: null, maya_number: null, created_at: "2022-11-01T00:00:00Z", updated_at: new Date().toISOString() },
-    images: [{ id: "i4", listing_id: "4", url: "https://placehold.co/300x420/1D3461/E63946?text=Ace+SEC", storage_path: "", is_primary: true, display_order: 0, created_at: "" }],
+    images: [{ id: "i4", listing_id: "4", url: "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/one-piece/OP02/OP02-013_en.webp", storage_path: "", is_primary: true, display_order: 0, created_at: "" }],
   },
   {
     id: "5", seller_id: "s5", card_name: "Boa Hancock",
@@ -80,7 +80,7 @@ const MOCK_LISTINGS: Listing[] = [
     created_at: new Date(Date.now() - 48 * 3600000).toISOString(),
     updated_at: new Date().toISOString(),
     seller: { id: "s5", username: "hancock_trader", display_name: "Rica M.", email: "rica@example.com", phone: null, avatar_url: null, bio: null, role: "user", province: "Laguna", city: "Santa Rosa", email_verified: true, phone_verified: false, is_verified_seller: false, is_banned: false, ban_reason: null, total_sales: 11, total_purchases: 8, rating_avg: 4.6, rating_count: 10, member_since: "2023-09-05T00:00:00Z", last_active_at: new Date().toISOString(), preferred_payment: null, preferred_shipping: null, allow_meetup: false, gcash_number: null, maya_number: null, created_at: "2023-09-05T00:00:00Z", updated_at: new Date().toISOString() },
-    images: [{ id: "i5", listing_id: "5", url: "https://placehold.co/300x420/1D3461/F4A261?text=Hancock+SR", storage_path: "", is_primary: true, display_order: 0, created_at: "" }],
+    images: [{ id: "i5", listing_id: "5", url: "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/one-piece/OP04/OP04-031_en.webp", storage_path: "", is_primary: true, display_order: 0, created_at: "" }],
   },
   {
     id: "6", seller_id: "s1", card_name: "Shanks",
@@ -94,7 +94,7 @@ const MOCK_LISTINGS: Listing[] = [
     created_at: new Date(Date.now() - 1 * 3600000).toISOString(),
     updated_at: new Date().toISOString(),
     seller: { id: "s1", username: "luffyfan_ph", display_name: "Nico R.", email: "nico@example.com", phone: null, avatar_url: null, bio: null, role: "seller", province: "Metro Manila", city: "Makati", email_verified: true, phone_verified: true, is_verified_seller: true, is_banned: false, ban_reason: null, total_sales: 87, total_purchases: 12, rating_avg: 4.9, rating_count: 74, member_since: "2023-01-15T00:00:00Z", last_active_at: new Date().toISOString(), preferred_payment: ["gcash"], preferred_shipping: ["lbc"], allow_meetup: true, gcash_number: null, maya_number: null, created_at: "2023-01-15T00:00:00Z", updated_at: new Date().toISOString() },
-    images: [{ id: "i6", listing_id: "6", url: "https://placehold.co/300x420/E63946/ffffff?text=Shanks+SEC", storage_path: "", is_primary: true, display_order: 0, created_at: "" }],
+    images: [{ id: "i6", listing_id: "6", url: "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/one-piece/OP09/OP09-124_en.webp", storage_path: "", is_primary: true, display_order: 0, created_at: "" }],
   },
   {
     id: "7", seller_id: "s3", card_name: "Nami",
@@ -108,7 +108,7 @@ const MOCK_LISTINGS: Listing[] = [
     created_at: new Date(Date.now() - 72 * 3600000).toISOString(),
     updated_at: new Date().toISOString(),
     seller: { id: "s3", username: "lawkeeper_ph", display_name: "Ana S.", email: "ana@example.com", phone: null, avatar_url: null, bio: null, role: "user", province: "Metro Manila", city: "Quezon City", email_verified: true, phone_verified: false, is_verified_seller: false, is_banned: false, ban_reason: null, total_sales: 5, total_purchases: 22, rating_avg: 5.0, rating_count: 5, member_since: "2024-02-10T00:00:00Z", last_active_at: new Date().toISOString(), preferred_payment: null, preferred_shipping: null, allow_meetup: true, gcash_number: null, maya_number: null, created_at: "2024-02-10T00:00:00Z", updated_at: new Date().toISOString() },
-    images: [{ id: "i7", listing_id: "7", url: "https://placehold.co/300x420/1D3461/34D399?text=Nami+R", storage_path: "", is_primary: true, display_order: 0, created_at: "" }],
+    images: [{ id: "i7", listing_id: "7", url: "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/one-piece/OP07/OP07-085_en.webp", storage_path: "", is_primary: true, display_order: 0, created_at: "" }],
   },
   {
     id: "8", seller_id: "s4", card_name: "Dracule Mihawk",
@@ -122,7 +122,7 @@ const MOCK_LISTINGS: Listing[] = [
     created_at: new Date(Date.now() - 3 * 3600000).toISOString(),
     updated_at: new Date().toISOString(),
     seller: { id: "s4", username: "ace_davao", display_name: "Ben T.", email: "ben@example.com", phone: null, avatar_url: null, bio: null, role: "seller", province: "Davao del Sur", city: "Davao City", email_verified: true, phone_verified: true, is_verified_seller: true, is_banned: false, ban_reason: null, total_sales: 156, total_purchases: 31, rating_avg: 4.8, rating_count: 140, member_since: "2022-11-01T00:00:00Z", last_active_at: new Date().toISOString(), preferred_payment: ["gcash", "maya"], preferred_shipping: ["lbc", "jt_express"], allow_meetup: true, gcash_number: null, maya_number: null, created_at: "2022-11-01T00:00:00Z", updated_at: new Date().toISOString() },
-    images: [{ id: "i8", listing_id: "8", url: "https://placehold.co/300x420/1D3461/FBBF24?text=Mihawk+SEC", storage_path: "", is_primary: true, display_order: 0, created_at: "" }],
+    images: [{ id: "i8", listing_id: "8", url: "https://limitlesstcg.nyc3.cdn.digitaloceanspaces.com/one-piece/OP09/OP09-018_en.webp", storage_path: "", is_primary: true, display_order: 0, created_at: "" }],
   },
 ];
 
