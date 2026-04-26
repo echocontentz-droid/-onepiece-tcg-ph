@@ -1,17 +1,26 @@
 import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
-import { theme } from "../theme";
+import { fonts, theme } from "../theme";
+import { GoldText } from "../components/HoloText";
+import { Logo } from "../components/Logo";
 
 export const CallToAction: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
   const enter = spring({ frame, fps, config: { damping: 18 } });
-  const exit = interpolate(frame, [100, 120], [1, 0], {
+  const lift = interpolate(enter, [0, 1], [40, 0]);
+  const opacity = enter;
+
+  const buttonFade = interpolate(frame, [40, 70], [0, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
-  const opacity = enter * exit;
-  const lift = interpolate(enter, [0, 1], [50, 0]);
+  const buttonScale = spring({ frame: Math.max(0, frame - 40), fps, config: { damping: 14 } });
+
+  const proofFade = interpolate(frame, [70, 100], [0, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
 
   return (
     <AbsoluteFill
@@ -21,49 +30,113 @@ export const CallToAction: React.FC = () => {
         textAlign: "center",
         opacity,
         transform: `translateY(${lift}px)`,
+        gap: 28,
       }}
     >
       <div
         style={{
-          fontFamily: "'Inter', sans-serif",
-          fontSize: 22,
-          letterSpacing: 8,
+          fontFamily: fonts.mono,
+          fontSize: 18,
+          letterSpacing: 6,
           textTransform: "uppercase",
-          color: theme.muted,
-          marginBottom: 32,
-        }}
-      >
-        Open beta — try it now
-      </div>
-
-      <div
-        style={{
-          fontFamily: "'Playfair Display', serif",
-          fontSize: 110,
-          fontWeight: 600,
-          color: theme.ink,
-          letterSpacing: -2,
-          lineHeight: 1,
-        }}
-      >
-        Step inside <span style={{ color: theme.accent }}>Cardhaus</span>.
-      </div>
-
-      <div
-        style={{
-          marginTop: 56,
-          padding: "20px 44px",
+          color: theme.gold,
+          padding: "10px 22px",
           borderRadius: 999,
-          background: theme.ink,
-          color: theme.paper,
-          fontFamily: "'Inter', sans-serif",
-          fontSize: 32,
-          fontWeight: 500,
-          letterSpacing: 1,
-          boxShadow: "0 24px 50px rgba(11, 11, 15, 0.25)",
+          border: `1px solid ${theme.gold}`,
+          background: "rgba(255, 215, 0, 0.06)",
         }}
       >
-        cardhaus.netlify.app
+        Closed Beta · Invite Only
+      </div>
+
+      <div
+        style={{
+          fontFamily: fonts.display,
+          fontSize: 168,
+          lineHeight: 1,
+          letterSpacing: -4,
+          color: theme.fg,
+          maxWidth: 1500,
+        }}
+      >
+        Join the <GoldText>Cardhaus</GoldText> beta.
+      </div>
+
+      <div
+        style={{
+          fontFamily: fonts.sans,
+          fontSize: 26,
+          color: theme.fgDim,
+          maxWidth: 900,
+          marginTop: 4,
+          lineHeight: 1.5,
+        }}
+      >
+        The live-auction marketplace TCG collectors in the Philippines deserve.
+      </div>
+
+      <div
+        style={{
+          marginTop: 24,
+          display: "flex",
+          alignItems: "center",
+          gap: 16,
+          opacity: buttonFade,
+          transform: `scale(${0.92 + buttonScale * 0.08})`,
+        }}
+      >
+        <div
+          style={{
+            padding: "20px 44px",
+            borderRadius: 999,
+            background: theme.gold,
+            color: "#000",
+            fontFamily: fonts.mono,
+            fontSize: 28,
+            fontWeight: 700,
+            letterSpacing: 3,
+            textTransform: "uppercase",
+            boxShadow: `0 24px 50px rgba(255, 215, 0, 0.25)`,
+          }}
+        >
+          cardhaus.netlify.app →
+        </div>
+      </div>
+
+      <div
+        style={{
+          marginTop: 32,
+          display: "flex",
+          alignItems: "center",
+          gap: 12,
+          opacity: proofFade,
+          fontFamily: fonts.mono,
+          fontSize: 16,
+          letterSpacing: 3,
+          textTransform: "uppercase",
+          color: theme.fgMuted,
+        }}
+      >
+        <span
+          style={{
+            width: 8,
+            height: 8,
+            borderRadius: 999,
+            background: theme.hot,
+            boxShadow: `0 0 12px ${theme.hot}`,
+          }}
+        />
+        247 collectors · One Piece + Pokémon · Philippines
+      </div>
+
+      <div
+        style={{
+          position: "absolute",
+          bottom: 60,
+          opacity: proofFade,
+        }}
+      >
+        <Logo size={48} color={theme.fg} />
       </div>
     </AbsoluteFill>
   );

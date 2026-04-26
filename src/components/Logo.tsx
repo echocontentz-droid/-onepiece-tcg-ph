@@ -1,61 +1,62 @@
-import { theme } from "../theme";
+import { fonts, theme } from "../theme";
 
 type Props = {
   size?: number;
   color?: string;
+  showSuffix?: boolean;
 };
 
-export const Logo: React.FC<Props> = ({ size = 96, color = theme.ink }) => {
+export const Logo: React.FC<Props> = ({ size = 56, color = theme.fg, showSuffix = false }) => {
+  const tile = size * 1.05;
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: size * 0.25,
-      }}
-    >
-      <Mark size={size} color={color} />
+    <div style={{ display: "flex", alignItems: "center", gap: size * 0.32 }}>
+      <div
+        style={{
+          width: tile,
+          height: tile,
+          borderRadius: tile * 0.22,
+          background: `linear-gradient(135deg, ${theme.gold}, ${theme.goldDark})`,
+          display: "grid",
+          placeItems: "center",
+          boxShadow: `0 0 0 1px ${theme.hairline2}`,
+        }}
+      >
+        <span
+          style={{
+            fontFamily: fonts.display,
+            fontSize: tile * 0.62,
+            color: "#000",
+            lineHeight: 1,
+          }}
+        >
+          C
+        </span>
+      </div>
       <span
         style={{
-          fontFamily: "'Playfair Display', serif",
-          fontWeight: 600,
+          fontFamily: fonts.display,
           fontSize: size,
           color,
-          letterSpacing: -size * 0.02,
+          letterSpacing: -size * 0.015,
           lineHeight: 1,
         }}
       >
         Cardhaus
       </span>
+      {showSuffix ? (
+        <span
+          style={{
+            fontFamily: fonts.mono,
+            fontSize: size * 0.32,
+            letterSpacing: 4,
+            textTransform: "uppercase",
+            color: theme.fgMuted,
+            marginLeft: size * 0.2,
+          }}
+        >
+          PH
+        </span>
+      ) : null}
     </div>
-  );
-};
-
-const Mark: React.FC<{ size: number; color: string }> = ({ size, color }) => {
-  const s = size * 1.05;
-  return (
-    <svg width={s} height={s} viewBox="0 0 100 100">
-      <rect
-        x="18"
-        y="10"
-        width="48"
-        height="72"
-        rx="6"
-        fill="none"
-        stroke={color}
-        strokeWidth="4"
-        transform="rotate(-8 42 46)"
-      />
-      <rect
-        x="34"
-        y="18"
-        width="48"
-        height="72"
-        rx="6"
-        fill={color}
-        transform="rotate(8 58 54)"
-      />
-      <circle cx="58" cy="54" r="6" fill={theme.paper} transform="rotate(8 58 54)" />
-    </svg>
   );
 };
