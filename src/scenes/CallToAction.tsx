@@ -2,10 +2,12 @@ import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } fr
 import { fonts, theme } from "../theme";
 import { GoldText } from "../components/HoloText";
 import { Logo } from "../components/Logo";
+import { useLayout } from "../useLayout";
 
 export const CallToAction: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+  const L = useLayout();
 
   const enter = spring({ frame, fps, config: { damping: 18 } });
   const lift = interpolate(enter, [0, 1], [40, 0]);
@@ -30,17 +32,18 @@ export const CallToAction: React.FC = () => {
         textAlign: "center",
         opacity,
         transform: `translateY(${lift}px)`,
-        gap: 28,
+        gap: L.vertical ? 22 : 28,
+        padding: `0 ${L.paddingX}px`,
       }}
     >
       <div
         style={{
           fontFamily: fonts.mono,
-          fontSize: 18,
+          fontSize: L.eyebrow.fontSize + 2,
           letterSpacing: 6,
           textTransform: "uppercase",
           color: theme.gold,
-          padding: "10px 22px",
+          padding: "10px 20px",
           borderRadius: 999,
           border: `1px solid ${theme.gold}`,
           background: "rgba(255, 215, 0, 0.06)",
@@ -52,11 +55,11 @@ export const CallToAction: React.FC = () => {
       <div
         style={{
           fontFamily: fonts.display,
-          fontSize: 168,
+          fontSize: L.headlineHero,
           lineHeight: 1,
           letterSpacing: -4,
           color: theme.fg,
-          maxWidth: 1500,
+          maxWidth: L.vertical ? 920 : 1500,
         }}
       >
         Join the <GoldText>Cardhaus</GoldText> beta.
@@ -65,9 +68,9 @@ export const CallToAction: React.FC = () => {
       <div
         style={{
           fontFamily: fonts.sans,
-          fontSize: 26,
+          fontSize: L.body - 2,
           color: theme.fgDim,
-          maxWidth: 900,
+          maxWidth: L.vertical ? 860 : 900,
           marginTop: 4,
           lineHeight: 1.5,
         }}
@@ -77,7 +80,7 @@ export const CallToAction: React.FC = () => {
 
       <div
         style={{
-          marginTop: 24,
+          marginTop: 18,
           display: "flex",
           alignItems: "center",
           gap: 16,
@@ -87,12 +90,12 @@ export const CallToAction: React.FC = () => {
       >
         <div
           style={{
-            padding: "20px 44px",
+            padding: L.vertical ? "16px 28px" : "20px 44px",
             borderRadius: 999,
             background: theme.gold,
             color: "#000",
             fontFamily: fonts.mono,
-            fontSize: 28,
+            fontSize: L.vertical ? 22 : 28,
             fontWeight: 700,
             letterSpacing: 3,
             textTransform: "uppercase",
@@ -105,16 +108,17 @@ export const CallToAction: React.FC = () => {
 
       <div
         style={{
-          marginTop: 32,
+          marginTop: L.vertical ? 24 : 32,
           display: "flex",
           alignItems: "center",
           gap: 12,
           opacity: proofFade,
           fontFamily: fonts.mono,
-          fontSize: 16,
+          fontSize: L.vertical ? 13 : 16,
           letterSpacing: 3,
           textTransform: "uppercase",
           color: theme.fgMuted,
+          textAlign: "center",
         }}
       >
         <span
@@ -132,11 +136,11 @@ export const CallToAction: React.FC = () => {
       <div
         style={{
           position: "absolute",
-          bottom: 60,
+          bottom: L.vertical ? 80 : 60,
           opacity: proofFade,
         }}
       >
-        <Logo size={48} color={theme.fg} />
+        <Logo size={L.vertical ? 36 : 48} color={theme.fg} />
       </div>
     </AbsoluteFill>
   );

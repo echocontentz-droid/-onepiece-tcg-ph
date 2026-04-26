@@ -2,10 +2,12 @@ import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } fr
 import { fonts, theme } from "../theme";
 import { GoldText } from "../components/HoloText";
 import { Pillar } from "../components/Pillar";
+import { useLayout } from "../useLayout";
 
 export const Welcome: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+  const L = useLayout();
 
   const enter = spring({ frame, fps, config: { damping: 18, mass: 0.9 } });
   const exit = interpolate(frame, [95, 120], [1, 0], {
@@ -28,17 +30,18 @@ export const Welcome: React.FC = () => {
         textAlign: "center",
         opacity: fade,
         transform: `translateY(${lift}px)`,
-        gap: 28,
+        gap: L.vertical ? 22 : 28,
+        padding: `0 ${L.paddingX}px`,
       }}
     >
       <div
         style={{
           fontFamily: fonts.mono,
-          fontSize: 18,
+          fontSize: L.eyebrow.fontSize + 2,
           letterSpacing: 6,
           textTransform: "uppercase",
           color: theme.gold,
-          padding: "10px 22px",
+          padding: "10px 20px",
           borderRadius: 999,
           border: `1px solid ${theme.gold}`,
           background: "rgba(255, 215, 0, 0.06)",
@@ -50,7 +53,7 @@ export const Welcome: React.FC = () => {
       <div
         style={{
           fontFamily: fonts.display,
-          fontSize: 96,
+          fontSize: L.vertical ? 72 : 96,
           lineHeight: 1,
           letterSpacing: -2,
         }}
@@ -61,7 +64,7 @@ export const Welcome: React.FC = () => {
       <div
         style={{
           fontFamily: fonts.display,
-          fontSize: 168,
+          fontSize: L.headlineHero,
           lineHeight: 1,
           letterSpacing: -4,
           color: theme.fg,
@@ -74,11 +77,12 @@ export const Welcome: React.FC = () => {
       <div
         style={{
           fontFamily: fonts.mono,
-          fontSize: 18,
+          fontSize: L.eyebrow.fontSize + 2,
           letterSpacing: 5,
           textTransform: "uppercase",
           color: theme.fgDim,
           marginTop: 4,
+          maxWidth: L.vertical ? 880 : 1400,
         }}
       >
         The live-auction marketplace for PH collectors.
@@ -86,9 +90,11 @@ export const Welcome: React.FC = () => {
 
       <div
         style={{
-          marginTop: 28,
+          marginTop: 24,
           display: "flex",
-          gap: 16,
+          gap: 14,
+          flexWrap: "wrap",
+          justifyContent: "center",
           opacity: pillarFade,
           transform: `translateY(${(1 - pillarFade) * 12}px)`,
         }}

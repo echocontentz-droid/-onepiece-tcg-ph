@@ -5,8 +5,11 @@
   "scripts": {
     "dev": "remotion studio src/index.ts",
     "build": "remotion render src/index.ts CardhausPromo out/cardhaus-promo.mp4",
+    "build:vertical": "remotion render src/index.ts CardhausPromoVertical out/cardhaus-promo-vertical.mp4",
+    "build:all": "npm run build && npm run build:vertical",
     "build:gif": "remotion render src/index.ts CardhausPromo out/cardhaus-promo.gif --codec=gif",
     "still": "remotion still src/index.ts CardhausPromo out/poster.png --frame=120",
+    "still:vertical": "remotion still src/index.ts CardhausPromoVertical out/poster-vertical.png --frame=120",
     "upgrade": "remotion upgrade"
   },
   "dependencies": {

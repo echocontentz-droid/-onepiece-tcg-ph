@@ -27,8 +27,6 @@ export const fonts = {
 } as const;
 
 export const fps = 30;
-export const width = 1920;
-export const height = 1080;
 export const durationInFrames = 840;
 
 export const sceneFrames = {

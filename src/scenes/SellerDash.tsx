@@ -1,10 +1,12 @@
-import { AbsoluteFill, interpolate, Sequence, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
 import { fonts, theme } from "../theme";
 import { PhoneMock } from "../components/PhoneMock";
+import { useLayout } from "../useLayout";
 
 export const SellerDash: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+  const L = useLayout();
 
   const enter = spring({ frame, fps, config: { damping: 22 } });
   const exit = interpolate(frame, [125, 150], [1, 0], {
@@ -17,104 +19,118 @@ export const SellerDash: React.FC = () => {
   const phoneShift = interpolate(enter, [0, 1], [80, 0]);
   const textShift = interpolate(enter, [0, 1], [-40, 0]);
 
-  // Cross-fade dashboard → analytics around frame 75
   const swap = interpolate(frame, [70, 90], [0, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
 
-  return (
-    <AbsoluteFill
+  const phoneWidth = L.phoneHeight * (1080 / 2194);
+
+  const phone = (
+    <div
       style={{
-        opacity,
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: 120,
-        paddingLeft: 140,
-        paddingRight: 140,
+        transform: `translate(${L.vertical ? 0 : phoneShift}px, ${
+          L.vertical ? phoneShift : float
+        }px) rotate(${L.vertical ? 0 : -2}deg)`,
+        position: "relative",
+        width: phoneWidth,
+        height: L.phoneHeight,
+      }}
+    >
+      <div style={{ position: "absolute", inset: 0, opacity: 1 - swap }}>
+        <PhoneMock src="screenshots/dashboard.jpg" height={L.phoneHeight} />
+      </div>
+      <div style={{ position: "absolute", inset: 0, opacity: swap }}>
+        <PhoneMock src="screenshots/analytics.jpg" height={L.phoneHeight} />
+      </div>
+    </div>
+  );
+
+  const copy = (
+    <div
+      style={{
+        flex: L.vertical ? "0 0 auto" : 1,
+        maxWidth: L.contentMaxWidth,
+        transform: `translateX(${L.vertical ? 0 : textShift}px)`,
+        textAlign: L.textAlign,
+        display: "flex",
+        flexDirection: "column",
+        alignItems: L.align,
       }}
     >
       <div
         style={{
-          flex: 1,
-          maxWidth: 880,
-          transform: `translateX(${textShift}px)`,
+          fontFamily: fonts.mono,
+          fontSize: L.eyebrow.fontSize,
+          letterSpacing: 5,
+          textTransform: "uppercase",
+          color: theme.holoC,
+          marginBottom: L.vertical ? 16 : 28,
         }}
       >
-        <div
-          style={{
-            fontFamily: fonts.mono,
-            fontSize: 16,
-            letterSpacing: 5,
-            textTransform: "uppercase",
-            color: theme.holoC,
-            marginBottom: 28,
-          }}
-        >
-          ✦ For sellers
-        </div>
-
-        <div
-          style={{
-            fontFamily: fonts.display,
-            fontSize: 130,
-            lineHeight: 1,
-            letterSpacing: -3,
-            color: theme.fg,
-          }}
-        >
-          Sell with intelligence.
-        </div>
-
-        <div
-          style={{
-            marginTop: 32,
-            fontFamily: fonts.sans,
-            fontSize: 28,
-            lineHeight: 1.45,
-            color: theme.fgDim,
-            maxWidth: 700,
-          }}
-        >
-          Track active lots, bid velocity, watcher counts, sell-rate, and 30-day averages — every listing analyzed.
-        </div>
-
-        <div
-          style={{
-            marginTop: 36,
-            display: "flex",
-            gap: 36,
-            fontFamily: fonts.mono,
-            color: theme.fg,
-          }}
-        >
-          <Stat label="Sell rate" value="73%" />
-          <Stat label="Avg sold (30d)" value="₱18,200" />
-          <Stat label="Watchers" value="38" />
-        </div>
+        ✦ For sellers
       </div>
 
       <div
         style={{
-          transform: `translate(${phoneShift}px, ${float}px) rotate(-2deg)`,
-          position: "relative",
-          width: 433,
-          height: 880,
+          fontFamily: fonts.display,
+          fontSize: L.headline,
+          lineHeight: 1,
+          letterSpacing: -3,
+          color: theme.fg,
         }}
       >
-        <div style={{ position: "absolute", inset: 0, opacity: 1 - swap }}>
-          <PhoneMock src="screenshots/dashboard.jpg" height={880} />
-        </div>
-        <div style={{ position: "absolute", inset: 0, opacity: swap }}>
-          <PhoneMock src="screenshots/analytics.jpg" height={880} />
-        </div>
+        Sell with intelligence.
       </div>
+
+      <div
+        style={{
+          marginTop: L.vertical ? 18 : 32,
+          fontFamily: fonts.sans,
+          fontSize: L.body,
+          lineHeight: 1.45,
+          color: theme.fgDim,
+          maxWidth: L.vertical ? 880 : 700,
+        }}
+      >
+        Track active lots, bid velocity, watcher counts, sell-rate, and 30-day averages — every listing analyzed.
+      </div>
+
+      <div
+        style={{
+          marginTop: L.vertical ? 22 : 36,
+          display: "flex",
+          gap: L.vertical ? 24 : 36,
+          flexWrap: "wrap",
+          justifyContent: L.vertical ? "center" : "flex-start",
+        }}
+      >
+        <Stat label="Sell rate" value="73%" L={L} />
+        <Stat label="Avg sold (30d)" value="₱18,200" L={L} />
+        <Stat label="Watchers" value="38" L={L} />
+      </div>
+    </div>
+  );
+
+  return (
+    <AbsoluteFill
+      style={{
+        opacity,
+        flexDirection: L.flexDir,
+        alignItems: "center",
+        justifyContent: "center",
+        gap: L.gap,
+        paddingLeft: L.paddingX,
+        paddingRight: L.paddingX,
+      }}
+    >
+      {L.vertical ? phone : copy}
+      {L.vertical ? copy : phone}
     </AbsoluteFill>
   );
 };
 
-const Stat: React.FC<{ label: string; value: string }> = ({ label, value }) => (
+const Stat: React.FC<{ label: string; value: string; L: ReturnType<typeof useLayout> }> = ({ label, value, L }) => (
   <div>
     <div
       style={{
@@ -130,7 +146,7 @@ const Stat: React.FC<{ label: string; value: string }> = ({ label, value }) => (
     <div
       style={{
         fontFamily: fonts.display,
-        fontSize: 56,
+        fontSize: L.statValue,
         color: theme.fg,
         lineHeight: 1.1,
         marginTop: 4,

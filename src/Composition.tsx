@@ -1,4 +1,4 @@
-import { AbsoluteFill, Sequence } from "remotion";
+import { AbsoluteFill, Audio, Sequence, staticFile } from "remotion";
 import { loadFont as loadDisplay } from "@remotion/google-fonts/InstrumentSerif";
 import { loadFont as loadSans } from "@remotion/google-fonts/InterTight";
 import { loadFont as loadMono } from "@remotion/google-fonts/JetBrainsMono";
@@ -18,6 +18,7 @@ loadMono();
 export const CardhausPromo: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: theme.bg, overflow: "hidden" }}>
+      <Audio src={staticFile("audio/soundtrack.mp3")} volume={0.6} />
       <Backdrop />
 
       <Sequence from={sceneFrames.welcome.from} durationInFrames={sceneFrames.welcome.length}>
