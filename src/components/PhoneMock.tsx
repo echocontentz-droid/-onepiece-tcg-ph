@@ -9,64 +9,122 @@ type Props = {
 
 const SCREEN_ASPECT = 1080 / 1740;
 
-const dims = (height: number) => {
-  const statusH = Math.round(height * 0.042);
-  const homeH = Math.round(height * 0.024);
-  const screenH = height - statusH - homeH;
-  const width = screenH * SCREEN_ASPECT;
-  return { statusH, homeH, screenH, width };
+const dims = (totalHeight: number) => {
+  const frameThickness = Math.max(8, Math.round(totalHeight * 0.014));
+  const screenHeight = totalHeight - frameThickness * 2;
+  const statusH = Math.round(screenHeight * 0.042);
+  const homeH = Math.round(screenHeight * 0.024);
+  const contentH = screenHeight - statusH - homeH;
+  const screenWidth = contentH * SCREEN_ASPECT;
+  const totalWidth = screenWidth + frameThickness * 2;
+  const outerRadius = Math.round(totalHeight * 0.078);
+  const innerRadius = Math.max(8, outerRadius - frameThickness);
+  return { frameThickness, screenHeight, statusH, homeH, contentH, screenWidth, totalWidth, outerRadius, innerRadius };
 };
 
-export const phoneWidthFromHeight = (height: number) => dims(height).width;
+export const phoneWidthFromHeight = (height: number) => dims(height).totalWidth;
 
 export const PhoneMock: React.FC<Props> = ({ src, height = 880, rotate = 0 }) => {
-  const { statusH, homeH, screenH, width } = dims(height);
-  const radius = Math.min(48, height * 0.052);
+  const D = dims(height);
 
   return (
     <div
       style={{
-        width,
+        width: D.totalWidth,
         height,
-        borderRadius: radius,
-        background: "#06060a",
-        boxShadow: `0 40px 90px rgba(0, 0, 0, 0.55), 0 0 0 2px rgba(255, 255, 255, 0.07), 0 0 0 4px rgba(0, 0, 0, 0.6)`,
-        transform: `rotate(${rotate}deg)`,
         position: "relative",
-        display: "flex",
-        flexDirection: "column",
-        overflow: "hidden",
+        transform: `rotate(${rotate}deg)`,
+        filter: "drop-shadow(0 50px 80px rgba(0, 0, 0, 0.55))",
       }}
     >
-      <StatusBar height={statusH} width={width} />
-      <Img
-        src={staticFile(src)}
-        style={{
-          width: "100%",
-          height: screenH,
-          objectFit: "cover",
-          objectPosition: "top",
-          display: "block",
-        }}
-      />
-      <HomeIndicator height={homeH} width={width} />
+      <SideButton side="left" topPct={0.205} heightPct={0.052} thickness={D.frameThickness} totalWidth={D.totalWidth} />
+      <SideButton side="left" topPct={0.305} heightPct={0.078} thickness={D.frameThickness} totalWidth={D.totalWidth} />
+      <SideButton side="left" topPct={0.405} heightPct={0.078} thickness={D.frameThickness} totalWidth={D.totalWidth} />
+      <SideButton side="right" topPct={0.27} heightPct={0.105} thickness={D.frameThickness} totalWidth={D.totalWidth} />
+
       <div
         style={{
           position: "absolute",
           inset: 0,
-          borderRadius: radius,
-          boxShadow: `inset 0 0 80px rgba(0, 0, 0, 0.4)`,
-          pointerEvents: "none",
+          borderRadius: D.outerRadius,
+          background: `linear-gradient(135deg, #44444c 0%, #2a2a30 18%, #1a1a1f 50%, #2a2a30 82%, #44444c 100%)`,
+          boxShadow: `inset 0 0 0 1px rgba(255, 255, 255, 0.08), inset 0 0 0 ${Math.max(2, D.frameThickness * 0.18)}px rgba(0, 0, 0, 0.4)`,
         }}
       />
+
+      <div
+        style={{
+          position: "absolute",
+          top: D.frameThickness,
+          left: D.frameThickness,
+          width: D.screenWidth,
+          height: D.screenHeight,
+          borderRadius: D.innerRadius,
+          background: "#06060a",
+          overflow: "hidden",
+          boxShadow: `inset 0 0 0 1px rgba(0, 0, 0, 0.9)`,
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <StatusBar height={D.statusH} width={D.screenWidth} />
+        <Img
+          src={staticFile(src)}
+          style={{
+            width: "100%",
+            height: D.contentH,
+            objectFit: "cover",
+            objectPosition: "top",
+            display: "block",
+          }}
+        />
+        <HomeIndicator height={D.homeH} width={D.screenWidth} />
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            borderRadius: D.innerRadius,
+            background: `linear-gradient(105deg, rgba(255, 255, 255, 0.04) 0%, transparent 18%, transparent 80%, rgba(255, 255, 255, 0.025) 100%)`,
+            pointerEvents: "none",
+          }}
+        />
+      </div>
     </div>
+  );
+};
+
+const SideButton: React.FC<{
+  side: "left" | "right";
+  topPct: number;
+  heightPct: number;
+  thickness: number;
+  totalWidth: number;
+}> = ({ side, topPct, heightPct, thickness, totalWidth }) => {
+  const buttonWidth = Math.max(3, thickness * 0.35);
+  const stickout = Math.max(2, thickness * 0.18);
+  return (
+    <div
+      style={{
+        position: "absolute",
+        top: `${topPct * 100}%`,
+        height: `${heightPct * 100}%`,
+        [side]: -stickout,
+        width: buttonWidth,
+        borderRadius: side === "left" ? `2px 0 0 2px` : `0 2px 2px 0`,
+        background: `linear-gradient(${side === "left" ? "90deg" : "270deg"}, #1a1a1f 0%, #3a3a42 60%, #2a2a30 100%)`,
+        boxShadow: side === "left"
+          ? `inset 1px 0 0 rgba(255, 255, 255, 0.08)`
+          : `inset -1px 0 0 rgba(255, 255, 255, 0.08)`,
+      }}
+      aria-hidden
+    />
   );
 };
 
 const StatusBar: React.FC<{ height: number; width: number }> = ({ height, width }) => {
   const fontSize = height * 0.46;
-  const islandWidth = width * 0.24;
-  const islandHeight = height * 0.6;
+  const islandWidth = width * 0.26;
+  const islandHeight = height * 0.62;
 
   return (
     <div
@@ -76,7 +134,7 @@ const StatusBar: React.FC<{ height: number; width: number }> = ({ height, width 
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        padding: `0 ${width * 0.07}px`,
+        padding: `0 ${width * 0.075}px`,
         background: "#06060a",
         color: theme.fg,
         fontSize,
@@ -127,7 +185,7 @@ const HomeIndicator: React.FC<{ height: number; width: number }> = ({ height, wi
           width: width * 0.32,
           height: Math.max(3, height * 0.2),
           borderRadius: 999,
-          background: "rgba(244, 242, 234, 0.8)",
+          background: "rgba(244, 242, 234, 0.85)",
         }}
       />
     </div>
