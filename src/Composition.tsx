@@ -1,7 +1,4 @@
 import { AbsoluteFill, Audio, Sequence, staticFile } from "remotion";
-import { loadFont as loadDisplay } from "@remotion/google-fonts/InstrumentSerif";
-import { loadFont as loadSans } from "@remotion/google-fonts/InterTight";
-import { loadFont as loadMono } from "@remotion/google-fonts/JetBrainsMono";
 import { sceneFrames, theme } from "./theme";
 import { Backdrop } from "./components/Backdrop";
 import { Welcome } from "./scenes/Welcome";
@@ -11,13 +8,10 @@ import { SellerDash } from "./scenes/SellerDash";
 import { Handoff } from "./scenes/Handoff";
 import { CallToAction } from "./scenes/CallToAction";
 
-loadDisplay();
-loadSans();
-loadMono();
-
 export const CardhausPromo: React.FC = () => {
   return (
     <AbsoluteFill style={{ backgroundColor: theme.bg, overflow: "hidden" }}>
+      <link rel="stylesheet" href={staticFile("fonts/fonts.css")} />
       <Audio src={staticFile("audio/soundtrack.mp3")} volume={0.6} />
       <Backdrop />
 
