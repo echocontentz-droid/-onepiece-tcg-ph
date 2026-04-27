@@ -1,6 +1,6 @@
 import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
 import { fonts, theme } from "../theme";
-import { PhoneMock } from "../components/PhoneMock";
+import { PhoneMock, phoneWidthFromHeight } from "../components/PhoneMock";
 import { useLayout } from "../useLayout";
 
 export const SellerDash: React.FC = () => {
@@ -24,7 +24,7 @@ export const SellerDash: React.FC = () => {
     extrapolateRight: "clamp",
   });
 
-  const phoneWidth = L.phoneHeight * (1080 / 1740);
+  const phoneWidth = phoneWidthFromHeight(L.phoneHeight);
 
   const phone = (
     <div
