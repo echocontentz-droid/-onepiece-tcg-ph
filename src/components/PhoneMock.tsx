@@ -12,7 +12,7 @@ const SCREEN_ASPECT = 1080 / 1740;
 const dims = (totalHeight: number) => {
   const frameThickness = Math.max(8, Math.round(totalHeight * 0.014));
   const screenHeight = totalHeight - frameThickness * 2;
-  const statusH = Math.round(screenHeight * 0.042);
+  const statusH = Math.round(screenHeight * 0.058);
   const homeH = Math.round(screenHeight * 0.024);
   const contentH = screenHeight - statusH - homeH;
   const screenWidth = contentH * SCREEN_ASPECT;
@@ -37,10 +37,10 @@ export const PhoneMock: React.FC<Props> = ({ src, height = 880, rotate = 0 }) =>
         filter: "drop-shadow(0 50px 80px rgba(0, 0, 0, 0.55))",
       }}
     >
-      <SideButton side="left" topPct={0.205} heightPct={0.052} thickness={D.frameThickness} totalWidth={D.totalWidth} />
-      <SideButton side="left" topPct={0.305} heightPct={0.078} thickness={D.frameThickness} totalWidth={D.totalWidth} />
-      <SideButton side="left" topPct={0.405} heightPct={0.078} thickness={D.frameThickness} totalWidth={D.totalWidth} />
-      <SideButton side="right" topPct={0.27} heightPct={0.105} thickness={D.frameThickness} totalWidth={D.totalWidth} />
+      <SideButton side="left" topPct={0.205} heightPct={0.052} thickness={D.frameThickness} />
+      <SideButton side="left" topPct={0.305} heightPct={0.078} thickness={D.frameThickness} />
+      <SideButton side="left" topPct={0.405} heightPct={0.078} thickness={D.frameThickness} />
+      <SideButton side="right" topPct={0.27} heightPct={0.105} thickness={D.frameThickness} />
 
       <div
         style={{
@@ -98,8 +98,7 @@ const SideButton: React.FC<{
   topPct: number;
   heightPct: number;
   thickness: number;
-  totalWidth: number;
-}> = ({ side, topPct, heightPct, thickness, totalWidth }) => {
+}> = ({ side, topPct, heightPct, thickness }) => {
   const buttonWidth = Math.max(3, thickness * 0.35);
   const stickout = Math.max(2, thickness * 0.18);
   return (
@@ -122,46 +121,93 @@ const SideButton: React.FC<{
 };
 
 const StatusBar: React.FC<{ height: number; width: number }> = ({ height, width }) => {
-  const fontSize = height * 0.46;
-  const islandWidth = width * 0.26;
-  const islandHeight = height * 0.62;
+  const fontSize = height * 0.36;
+  const notchWidth = width * 0.46;
+  const notchHeight = height * 0.66;
+  const notchRadius = Math.min(notchHeight * 0.42, 22);
+  const speakerW = notchWidth * 0.36;
+  const speakerH = Math.max(3, notchHeight * 0.13);
+  const cameraSize = Math.max(6, notchHeight * 0.3);
 
   return (
     <div
       style={{
         height,
         flex: "0 0 auto",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        padding: `0 ${width * 0.075}px`,
-        background: "#06060a",
-        color: theme.fg,
-        fontSize,
-        fontFamily: "system-ui, -apple-system, sans-serif",
-        fontWeight: 600,
         position: "relative",
+        background: "#06060a",
         zIndex: 2,
       }}
     >
-      <span style={{ letterSpacing: 0.5, lineHeight: 1 }}>9:41</span>
+      <span
+        style={{
+          position: "absolute",
+          left: width * 0.07,
+          top: "50%",
+          transform: "translateY(-50%)",
+          color: theme.fg,
+          fontSize,
+          fontFamily: "system-ui, -apple-system, sans-serif",
+          fontWeight: 600,
+          letterSpacing: 0.5,
+          lineHeight: 1,
+        }}
+      >
+        9:41
+      </span>
+
       <div
         style={{
           position: "absolute",
+          top: 0,
           left: "50%",
-          top: "50%",
-          transform: "translate(-50%, -50%)",
-          width: islandWidth,
-          height: islandHeight,
-          borderRadius: 999,
+          transform: "translateX(-50%)",
+          width: notchWidth,
+          height: notchHeight,
           background: "#000",
-          boxShadow: "inset 0 0 0 1px rgba(255, 255, 255, 0.06)",
+          borderRadius: `0 0 ${notchRadius}px ${notchRadius}px`,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: notchWidth * 0.07,
+          paddingTop: notchHeight * 0.08,
         }}
-      />
-      <div style={{ display: "flex", alignItems: "center", gap: height * 0.18 }}>
+        aria-hidden
+      >
+        <div
+          style={{
+            width: speakerW,
+            height: speakerH,
+            borderRadius: 999,
+            background: "#1a1a1f",
+            boxShadow: "inset 0 0 0 1px rgba(255, 255, 255, 0.05)",
+          }}
+        />
+        <div
+          style={{
+            width: cameraSize,
+            height: cameraSize,
+            borderRadius: 999,
+            background: "radial-gradient(circle at 35% 35%, #0e3548 0%, #061820 70%, #000 100%)",
+            boxShadow: "inset 0 0 0 1px rgba(120, 200, 230, 0.18)",
+          }}
+        />
+      </div>
+
+      <div
+        style={{
+          position: "absolute",
+          right: width * 0.07,
+          top: "50%",
+          transform: "translateY(-50%)",
+          display: "flex",
+          alignItems: "center",
+          gap: height * 0.12,
+        }}
+      >
         <SignalBars size={fontSize * 0.95} color={theme.fg} />
         <Wifi size={fontSize * 0.95} color={theme.fg} />
-        <Battery size={fontSize * 1.4} color={theme.fg} />
+        <Battery size={fontSize * 1.5} color={theme.fg} />
       </div>
     </div>
   );
