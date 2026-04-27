@@ -8,7 +8,7 @@ type Props = {
 };
 
 export const PhoneMock: React.FC<Props> = ({ src, height = 880, rotate = 0 }) => {
-  const aspect = 1080 / 2194;
+  const aspect = 1080 / 1740;
   const width = height * aspect;
   const radius = Math.min(40, height * 0.045);
 

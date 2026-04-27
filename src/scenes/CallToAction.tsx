@@ -4,6 +4,8 @@ import { GoldText } from "../components/HoloText";
 import { Logo } from "../components/Logo";
 import { useLayout } from "../useLayout";
 
+const FACEBOOK_BLUE = "#1877F2";
+
 export const CallToAction: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -75,7 +77,8 @@ export const CallToAction: React.FC = () => {
           lineHeight: 1.5,
         }}
       >
-        The live-auction marketplace TCG collectors in the Philippines deserve.
+        Invite codes go to followers first. Live auctions, anti-snipe protection,
+        verified PH sellers — all behind a closed beta.
       </div>
 
       <div
@@ -90,31 +93,48 @@ export const CallToAction: React.FC = () => {
       >
         <div
           style={{
-            padding: L.vertical ? "16px 28px" : "20px 44px",
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 16,
+            padding: L.vertical ? "16px 28px" : "20px 40px",
             borderRadius: 999,
-            background: theme.gold,
-            color: "#000",
-            fontFamily: fonts.mono,
+            background: FACEBOOK_BLUE,
+            color: "#fff",
+            fontFamily: fonts.sans,
             fontSize: L.vertical ? 22 : 28,
             fontWeight: 700,
-            letterSpacing: 3,
-            textTransform: "uppercase",
-            boxShadow: `0 24px 50px rgba(255, 215, 0, 0.25)`,
+            letterSpacing: 0.5,
+            boxShadow: `0 24px 50px rgba(24, 119, 242, 0.35)`,
           }}
         >
-          cardhaus.netlify.app →
+          <FacebookMark size={L.vertical ? 28 : 36} />
+          Follow Cardhaus PH for early access
         </div>
       </div>
 
       <div
         style={{
-          marginTop: L.vertical ? 24 : 32,
+          marginTop: L.vertical ? 22 : 28,
+          fontFamily: fonts.mono,
+          fontSize: L.vertical ? 13 : 16,
+          letterSpacing: 4,
+          textTransform: "uppercase",
+          color: theme.fg,
+          opacity: buttonFade,
+        }}
+      >
+        @CardhausPH on Facebook
+      </div>
+
+      <div
+        style={{
+          marginTop: L.vertical ? 18 : 24,
           display: "flex",
           alignItems: "center",
           gap: 12,
           opacity: proofFade,
           fontFamily: fonts.mono,
-          fontSize: L.vertical ? 13 : 16,
+          fontSize: L.vertical ? 12 : 14,
           letterSpacing: 3,
           textTransform: "uppercase",
           color: theme.fgMuted,
@@ -145,3 +165,13 @@ export const CallToAction: React.FC = () => {
     </AbsoluteFill>
   );
 };
+
+const FacebookMark: React.FC<{ size: number }> = ({ size }) => (
+  <svg width={size} height={size} viewBox="0 0 36 36" aria-hidden="true">
+    <circle cx="18" cy="18" r="18" fill="#fff" />
+    <path
+      d="M20.6 19.3h2.7l.4-3.4h-3.1v-2c0-1 .3-1.7 1.7-1.7h1.8V8.8c-.3 0-1.4-.1-2.6-.1-2.6 0-4.4 1.6-4.4 4.5v2.5h-3v3.4h3v9h3.5v-9z"
+      fill={FACEBOOK_BLUE}
+    />
+  </svg>
+);

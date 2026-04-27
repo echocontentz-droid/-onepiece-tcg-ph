@@ -24,7 +24,7 @@ export const SellerDash: React.FC = () => {
     extrapolateRight: "clamp",
   });
 
-  const phoneWidth = L.phoneHeight * (1080 / 2194);
+  const phoneWidth = L.phoneHeight * (1080 / 1740);
 
   const phone = (
     <div
