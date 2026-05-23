@@ -5,7 +5,7 @@ const fs = require('fs');
 const HTML_PATH = '/root/.claude/uploads/034cbb4f-dd24-41c5-ac89-8d1ee729d4c3/23981fa4-CARDHAUS_Promo_v2__Trading_Floor.html';
 const FRAMES_DIR = path.join(__dirname, 'video-output', 'frames');
 const FPS = 30;
-const DURATION_SECS = 15;
+const DURATION_SECS = 30;
 const TOTAL_FRAMES = FPS * DURATION_SECS;
 
 (async () => {
